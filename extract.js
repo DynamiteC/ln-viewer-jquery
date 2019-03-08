@@ -7,6 +7,7 @@ if(nodes[x].querySelectorAll('.me-wvmp-viewer-card__viewer-pic a').length>0)
 	arr[len]=[];
 	arr[len].push(nodes[x].querySelectorAll('.me-wvmp-viewer-card__viewer-pic a')[0].href)
 	arr[len].push(nodes[x].querySelectorAll('span.me-wvmp-viewer-card__name-text')[0].innerText.trim());
+	arr[len].push(nodes[x].querySelectorAll('span.distance-badge')[0].innerText.trim());
 }
 if(nodes[x].querySelectorAll('p.me-wvmp-viewer-card__time-ago').length>0)
 	arr[len].push(nodes[x].querySelectorAll('p.me-wvmp-viewer-card__time-ago')[0].innerText.trim())
@@ -15,17 +16,18 @@ var newArr = [];
 var currentC = 0;
 for(var x = 0; x < arr.length; x++)
 {
-if(arr[x][2])
+if(arr[x][3])
 	currentC = x;
 newArr[x] = [];
-if(arr[x][2]==undefined)
-	arr[x][2] = arr[currentC][2];
-newArr[x][0] = actualDate(arr[x][2])
+if(arr[x][3]==undefined)
+	arr[x][3] = arr[currentC][3];
+newArr[x][0] = actualDate(arr[x][3])
 newArr[x][1] = "Client Profile";
 newArr[x][2] = arr[x][1].split(' ')[0];
 newArr[x][3] = arr[x][1].split(' ')[1];
 newArr[x][4] = arr[x][1].toString().trim();	
 newArr[x][5] = arr[x][0];
+newArr[x][6] = (arr[x][2]=="1st") ? 'Yes' : 'No';
 }
 
 newArr = newArr.sort(function (a,b) {
