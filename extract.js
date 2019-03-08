@@ -20,12 +20,21 @@ if(arr[x][2])
 newArr[x] = [];
 if(arr[x][2]==undefined)
 	arr[x][2] = arr[currentC][2];
-newArr[x][0] = formatDate(actualDate(arr[x][2]))
+newArr[x][0] = actualDate(arr[x][2])
 newArr[x][1] = "Client Profile";
 newArr[x][2] = arr[x][1].split(' ')[0];
 newArr[x][3] = arr[x][1].split(' ')[1];
 newArr[x][4] = arr[x][1].toString().trim();	
 newArr[x][5] = arr[x][0];
+}
+
+newArr = newArr.sort(function (a,b) {
+	return a[0] - b[0];
+})
+
+for(var x = 0; x < newArr.length; x++)
+{
+	newArr[x][0] = formatDate(new Date(newArr[x][0]))
 }
 
 function formatDate(date) {
@@ -47,15 +56,15 @@ function formatDate(date) {
 function actualDate(str)
 {
 	if(str.indexOf('h')>-1)
-		return new Date(((new Date()).getTime()) - (Number(str.replace('h',''))*60*60*1000));
+		return new Date(((new Date()).getTime()) - (Number(str.replace('h',''))*60*60*1000)).getTime();
 	else if(str.indexOf('mo')>-1)
-		return new Date(((new Date()).getTime()) - (Number(str.replace('mo',''))*30*24*60*60*1000));
+		return new Date(((new Date()).getTime()) - (Number(str.replace('mo',''))*30*24*60*60*1000)).getTime();
 	else if(str.indexOf('m')>-1)
-		return new Date(((new Date()).getTime()) - (Number(str.replace('m',''))*60*1000));
+		return new Date(((new Date()).getTime()) - (Number(str.replace('m',''))*60*1000)).getTime();
 	else if(str.indexOf('d')>-1)
-		return new Date(((new Date()).getTime()) - (Number(str.replace('d',''))*24*60*60*1000));
+		return new Date(((new Date()).getTime()) - (Number(str.replace('d',''))*24*60*60*1000)).getTime();
 	else if(str.indexOf('w')>-1)
-		return new Date(((new Date()).getTime()) - (Number(str.replace('w',''))*7*24*60*60*1000));
+		return new Date(((new Date()).getTime()) - (Number(str.replace('w',''))*7*24*60*60*1000)).getTime();
 	else
 		return new Date();
 }
