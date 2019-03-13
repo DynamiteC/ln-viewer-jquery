@@ -7,8 +7,10 @@ if(nodes[x].querySelectorAll('.me-wvmp-viewer-card__viewer-pic a').length>0)
 	arr[len]=[];
 	arr[len].push(nodes[x].querySelectorAll('.me-wvmp-viewer-card__viewer-pic a')[0].href)
 	arr[len].push(nodes[x].querySelectorAll('span.me-wvmp-viewer-card__name-text')[0].innerText.trim());
-	arr[len].push(nodes[x].querySelectorAll('span.distance-badge')[0].innerText.trim());
+	
 }
+if(nodes[x].querySelectorAll('span.distance-badge').length>0)
+	arr[len].push(nodes[x].querySelectorAll('span.distance-badge')[0].innerText.trim());
 if(nodes[x].querySelectorAll('p.me-wvmp-viewer-card__time-ago').length>0)
 	arr[len].push(nodes[x].querySelectorAll('p.me-wvmp-viewer-card__time-ago')[0].innerText.trim())
 }
@@ -57,16 +59,16 @@ function formatDate(date) {
 
 function actualDate(str)
 {
-	if(str.indexOf('h')>-1)
-		return new Date(((new Date()).getTime()) - (Number(str.replace('h',''))*60*60*1000)).getTime();
-	else if(str.indexOf('mo')>-1)
-		return new Date(((new Date()).getTime()) - (Number(str.replace('mo',''))*30*24*60*60*1000)).getTime();
-	else if(str.indexOf('m')>-1)
-		return new Date(((new Date()).getTime()) - (Number(str.replace('m',''))*60*1000)).getTime();
-	else if(str.indexOf('d')>-1)
-		return new Date(((new Date()).getTime()) - (Number(str.replace('d',''))*24*60*60*1000)).getTime();
-	else if(str.indexOf('w')>-1)
-		return new Date(((new Date()).getTime()) - (Number(str.replace('w',''))*7*24*60*60*1000)).getTime();
+	if(str.indexOf('h')>-1 || str.indexOf('hour')>-1)
+		return new Date(((new Date()).getTime()) - (Number(str.replace(/[a-z]/gi,'').trim())*60*60*1000)).getTime();
+	else if(str.indexOf('mo')>-1 || str.indexOf('month')>-1)
+		return new Date(((new Date()).getTime()) - (Number(str.replace(/[a-z]/gi,'').trim())*30*24*60*60*1000)).getTime();
+	else if(str.indexOf('m')>-1 || str.indexOf('min')>-1)
+		return new Date(((new Date()).getTime()) - (Number(str.replace(/[a-z]/gi,'').trim())*60*1000)).getTime();
+	else if(str.indexOf('d')>-1 || str.indexOf('day')>-1)
+		return new Date(((new Date()).getTime()) - (Number(str.replace(/[a-z]/gi,'').trim())*24*60*60*1000)).getTime();
+	else if(str.indexOf('w')>-1 || str.indexOf('w')>-1)
+		return new Date(((new Date()).getTime()) - (Number(str.replace(/[a-z]/gi,'').trim())*7*24*60*60*1000)).getTime();
 	else
 		return new Date();
 }
