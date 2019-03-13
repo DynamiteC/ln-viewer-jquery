@@ -5,14 +5,14 @@ if(nodes[x].querySelectorAll('.me-wvmp-viewer-card__viewer-pic a').length>0)
 {
 	var len = arr.length;
 	arr[len]=[];
-	arr[len].push(nodes[x].querySelectorAll('.me-wvmp-viewer-card__viewer-pic a')[0].href)
-	arr[len].push(nodes[x].querySelectorAll('span.me-wvmp-viewer-card__name-text')[0].innerText.trim());
+	arr[len][0] = nodes[x].querySelectorAll('.me-wvmp-viewer-card__viewer-pic a')[0].href;
+	arr[len][1] = (nodes[x].querySelectorAll('span.me-wvmp-viewer-card__name-text')[0].innerText.trim());
 	
 }
 if(nodes[x].querySelectorAll('span.distance-badge').length>0)
-	arr[len].push(nodes[x].querySelectorAll('span.distance-badge')[0].innerText.trim());
+	arr[len][2] = (nodes[x].querySelectorAll('span.distance-badge')[0].innerText.trim());
 if(nodes[x].querySelectorAll('p.me-wvmp-viewer-card__time-ago').length>0)
-	arr[len].push(nodes[x].querySelectorAll('p.me-wvmp-viewer-card__time-ago')[0].innerText.trim())
+	arr[len][3] = (nodes[x].querySelectorAll('p.me-wvmp-viewer-card__time-ago')[0].innerText.trim())
 }
 var newArr = [];
 var currentC = 0;
