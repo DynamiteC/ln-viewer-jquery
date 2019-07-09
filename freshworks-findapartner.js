@@ -4,7 +4,7 @@
 	var nodes = document.querySelectorAll('.partners-results-outer .partners-results-container .partner-card');
 	var arr = [];
 	for(var x = 0; x < nodes.length; x++) { 
-		var info="",address="",email="",desk="",phone="";
+		var info="",address="",email="",desk="",phone="",products="";
 		if(!nodes[x].querySelector('.reseller-info h6'))
 			continue;
 		
@@ -18,7 +18,18 @@
 			desk = nodes[x].querySelector('.icon-desk').nextElementSibling.innerText.trim();
 		if(nodes[x].querySelector('.icon-phone'))
 			phone = nodes[x].querySelector('.icon-phone').nextElementSibling.innerText.trim();
-		arr.push([info.replace(/\n/g,''),address.replace(/\n/g,''),email.replace(/\n/g,''),desk.replace(/\n/g,''),"'" + phone.replace(/\n/g,'')]);	
+		
+		if(nodes[x].querySelectorAll('.reseller-type'))
+        {
+			var type = nodes[x].querySelectorAll('.reseller-type');
+		    for(var y = 0; y < type.length; y++) { 
+				if(type[y].querySelector('h6').innerText.trim()=='Products'){
+					products = type[y].querySelector('h6').nextElementSibling.innerText.trim();
+				}
+			}
+        }
+
+		arr.push([info.replace(/\n/g,''),address.replace(/\n/g,''),email.replace(/\n/g,''),desk.replace(/\n/g,''),"'" + phone.replace(/\n/g,''),products.replace(/\n/g,'')]);	
 		
 	}
 	copy(arr.map(function(d){
